@@ -1,5 +1,5 @@
-require 'rspec'
-require_relative '../lib/rage_flip'
+require "rspec"
+require_relative "../lib/rage_flip"
 
 RSpec.configure do |config|
   config.expect_with :rspec do |c|

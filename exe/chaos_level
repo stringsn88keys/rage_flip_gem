@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require_relative '../lib/rage_flip'
+require_relative "../lib/rage_flip"
 
 if ARGV.length == 0
   puts "Current chaos level: #{RageFlip::Chaos.current_chaos_level}"
@@ -9,7 +9,7 @@ elsif ARGV.length != 1
   puts "Usage: chaos_level [more|less|number|show]"
   puts "  (no args) - Show current chaos level"
   puts "  more      - Increase chaos level by 1"
-  puts "  less      - Decrease chaos level by 1" 
+  puts "  less      - Decrease chaos level by 1"
   puts "  number    - Set chaos level to specific number"
   puts "  show      - Show current chaos level"
   exit 1
@@ -17,7 +17,7 @@ end
 
 instruction = ARGV[0]
 
-if instruction == 'show'
+if instruction == "show"
   puts "Current chaos level: #{RageFlip::Chaos.current_chaos_level}"
 else
   result = RageFlip::Chaos.set_chaos_level(instruction)

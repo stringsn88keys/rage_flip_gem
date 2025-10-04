@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 
-require_relative '../lib/rage_flip'
+require_relative "../lib/rage_flip"
 
-text = ARGV.join(' ')
+text = ARGV.join(" ")
 
 if text.empty?
   puts "Usage: underline <text_to_underline>"
@@ -12,8 +12,7 @@ end
 result = RageFlip::Underline.single_underline(text)
 
 if RageFlip::Clipboard.copy(result)
-  puts result
 else
   puts "Failed to copy to clipboard, but here's your underlined text:"
-  puts result
 end
+puts result

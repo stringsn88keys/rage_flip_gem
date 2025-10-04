@@ -1,36 +1,36 @@
-require 'rake'
-require 'rake/testtask'
-require 'rspec/core/rake_task'
-require_relative 'lib/rage_flip/version'
+require "rake"
+require "rake/testtask"
+require "rspec/core/rake_task"
+require_relative "lib/rage_flip/version"
 
 # Define the default task
-task :default => :test
+task default: :test
 
 # Define a task for running tests with RSpec
 RSpec::Core::RakeTask.new(:test) do |t|
-  t.pattern = 'spec/**/*_spec.rb'
+  t.pattern = "spec/**/*_spec.rb"
 end
 
 # Alias for backwards compatibility
-task :spec => :test
+task spec: :test
 
 # Define a task for building the gem
 task :build do
-  sh 'gem build rage_flip.gemspec'
+  sh "gem build rage_flip.gemspec"
 end
 
 # Define a task for installing the gem
 task :install do
-  sh 'gem install rage_flip-*.gem'
+  sh "gem install rage_flip-*.gem"
 end
 
 # Define a task for cleaning up generated files
 task :clean do
-  rm_rf Dir['*.gem']
+  rm_rf Dir["*.gem"]
 end
 
 # Define a task for running all tasks
-task :all => [:build, :install, :test]
+task all: [:build, :install, :test]
 
 # Version management tasks
 namespace :version do
@@ -60,12 +60,12 @@ namespace :version do
       puts "Usage: rake version:set[1.2.3]"
       exit 1
     end
-    
+
     unless args[:version].match?(/^\d+\.\d+\.\d+$/)
       puts "Error: Version must be in format X.Y.Z (e.g., 1.2.3)"
       exit 1
     end
-    
+
     update_version_file(args[:version])
     puts "Version set to #{args[:version]}"
   end
@@ -101,8 +101,8 @@ end
 # Helper method to bump version
 def bump_version(type)
   current_version = read_current_version
-  current = current_version.split('.').map(&:to_i)
-  
+  current = current_version.split(".").map(&:to_i)
+
   case type
   when :patch
     current[2] += 1
@@ -114,28 +114,28 @@ def bump_version(type)
     current[1] = 0
     current[2] = 0
   end
-  
-  new_version = current.join('.')
+
+  new_version = current.join(".")
   update_version_file(new_version)
   puts "Version bumped from #{current_version} to #{new_version}"
 end
 
 # Helper method to read current version from file
 def read_current_version
-  version_file = 'lib/rage_flip/version.rb'
+  version_file = "lib/rage_flip/version.rb"
   content = File.read(version_file)
   content.match(/VERSION = "([^"]+)"/)[1]
 end
 
 # Helper method to update version file
 def update_version_file(new_version)
-  version_file = 'lib/rage_flip/version.rb'
+  version_file = "lib/rage_flip/version.rb"
   content = File.read(version_file)
-  
+
   updated_content = content.gsub(
-    /VERSION = "[^"]+"/, 
+    /VERSION = "[^"]+"/,
     "VERSION = \"#{new_version}\""
   )
-  
+
   File.write(version_file, updated_content)
 end

@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 
-require_relative '../lib/rage_flip'
+require_relative "../lib/rage_flip"
 
-text = ARGV.join(' ')
+text = ARGV.join(" ")
 
 if text.empty?
   puts "Usage: strikethrough <text_to_strikethrough>"
@@ -12,8 +12,7 @@ end
 result = RageFlip::Strikethrough.process(text)
 
 if RageFlip::Clipboard.copy(result)
-  puts result
 else
   puts "Failed to copy to clipboard, but here's your strikethrough text:"
-  puts result
 end
+puts result

@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+require_relative "../lib/rage_flip"
+
+SUBSTITUTION_NAME = File.basename($0)
+result = RageFlip::TextSubstitution.process(SUBSTITUTION_NAME)
+
+if result
+  if RageFlip::Clipboard.copy(result)
+  else
+    puts "Failed to copy to clipboard, but here's your text substitution:"
+  end
+  puts result
+else
+  puts "Unknown substitution: #{SUBSTITUTION_NAME}"
+  exit 1
+end

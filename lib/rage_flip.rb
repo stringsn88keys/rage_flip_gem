@@ -6,7 +6,8 @@ require_relative "rage_flip/underline"
 require_relative "rage_flip/chaos"
 require_relative "rage_flip/clipboard"
 require_relative "rage_flip/emote"
-require 'shellwords'
+require_relative "rage_flip/text_substitution"
+require "shellwords"
 
 module RageFlip
   class Error < StandardError; end
