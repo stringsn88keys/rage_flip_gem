@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.homepage = "https://github.com/stringsn88keys/rage_flip_gem"
   spec.license = "MIT"
 
-  spec.files = Dir["lib/**/*", "bin/*", "exe/*", "README.md", "CHANGELOG.md", "Rakefile", "Gemfile", "spec/**/*"]
+  spec.files = Dir["lib/**/*", "bin/*", "exe/*", "README.md", "CHANGELOG.md", "LICENSE", "Rakefile", "Gemfile", "spec/**/*"]
   spec.bindir = "exe"
   spec.executables = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
