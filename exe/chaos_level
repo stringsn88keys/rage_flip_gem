@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/rage_flip'
+
+if ARGV.length != 1
+  puts "Usage: chaos_level <more|less|number>"
+  puts "  more  - Increase chaos level by 1"
+  puts "  less  - Decrease chaos level by 1" 
+  puts "  number - Set chaos level to specific number"
+  exit 1
+end
+
+instruction = ARGV[0]
+result = RageFlip::Chaos.set_chaos_level(instruction)
+puts result

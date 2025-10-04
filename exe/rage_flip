@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/rage_flip'
+
+# Get the arguments passed to the script
+text = ARGV.join(' ')
+
+if text.empty?
+  puts "Usage: rage_flip <text_to_flip>"
+  exit 1
+end
+
+# Create the rage flip with table flip emoticons
+result = RageFlip::Flipper.rage_flip(text)
+
+# Copy to clipboard
+if RageFlip::Clipboard.copy(result)
+  puts result
+else
+  puts "Failed to copy to clipboard, but here's your flipped text:"
+  puts result
+end

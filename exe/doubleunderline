@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/rage_flip'
+
+text = ARGV.join(' ')
+
+if text.empty?
+  puts "Usage: doubleunderline <text_to_double_underline>"
+  exit 1
+end
+
+result = RageFlip::Underline.double_underline(text)
+
+if RageFlip::Clipboard.copy(result)
+  puts result
+else
+  puts "Failed to copy to clipboard, but here's your double underlined text:"
+  puts result
+end

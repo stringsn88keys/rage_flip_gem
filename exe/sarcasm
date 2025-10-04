@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/rage_flip'
+
+text = ARGV.join(' ')
+
+if text.empty?
+  puts "Usage: sarcasm <text_to_sarcasm>"
+  exit 1
+end
+
+result = RageFlip::Sarcasm.process(text)
+
+if RageFlip::Clipboard.copy(result)
+  puts result
+else
+  puts "Failed to copy to clipboard, but here's your sarcastic text:"
+  puts result
+end
