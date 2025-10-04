@@ -1,122 +1,63 @@
-# RageFlip# rage_flip
+# RageFlip
 
+`rage_flip` is a Ruby gem that provides text manipulation utilities with clipboard integration. It flips text upside down with rage table flip emoticons and includes several other text formatting tools.
 
+## Installation
 
-`rage_flip` is a Ruby gem that provides text manipulation utilities with clipboard integration. It flips text upside down with rage table flip emoticons and includes several other text formatting tools.`rage_flip` is a Ruby gem that allows you to flip all arguments passed to it and copy the result to your clipboard. It provides a simple command-line interface for quick usage and is designed to work across different platforms.
+Add this line to your application's Gemfile:
 
+```ruby
+gem 'rage_flip'
+```
 
+And then execute:
 
-## Installation## Installation
-
-
-
-Add this line to your application's Gemfile:To install the `rage_flip` gem, you can use the following command:
-
-
-
-```ruby```bash
-
-gem 'rage_flip'gem install rage_flip
-
-``````
-
-
-
-And then execute:## Usage
-
-
-
-```bashOnce installed, you can use the `rage_flip` command in your terminal. Here’s how to use it:
-
+```bash
 bundle install
+```
 
-``````bash
+Or install it yourself as:
 
-rage_flip arg1 arg2 arg3
-
-Or install it yourself as:```
-
-
-
-```bashThis command will flip the order of the arguments and copy the result to your clipboard.
-
+```bash
 gem install rage_flip
+```
 
-```### Example
+## Usage
 
+The gem provides several command-line utilities for text manipulation:
 
+### rage_flip
 
-## Usage```bash
+The main command flips text upside down and adds rage table flip emoticons:
 
-$ rage_flip hello world
-
-The gem provides several command-line utilities for text manipulation:```
-
-
-
-### rage_flipThis will result in `world hello` being copied to your clipboard.
-
-
-
-The main command flips text upside down and adds rage table flip emoticons:## Executables
-
-
-
-```bashThe `rage_flip` gem includes the following executables:
-
+```bash
 rage_flip "Hello World"
+# Output: (ノಠ益ಠ)ノ彡┻plɹoM ollǝH┻  
+# Result is automatically copied to clipboard
+```
 
-# Output: (ノಠ益ಠ)ノ彡┻plɹoM ollǝH┻- `rage_flip`: The main command to flip arguments and copy to clipboard.
-
-# Result is automatically copied to clipboard- `console`: An interactive console for testing and experimenting with the gem.
-
-```- `setup`: A script to set up the development environment.
-
-
-
-The flip transformation:## Platform-Specific Clipboard Commands
-
+The flip transformation:
 - Reverses the text order
-
-- Maps characters to their upside-down equivalentsThe gem uses platform-specific commands to copy text to the clipboard:
-
+- Maps characters to their upside-down equivalents
 - Wraps the result with `(ノಠ益ಠ)ノ彡┻` and `┻`
 
-- **macOS**: Uses `pbcopy`
-
-### sarcasm- **Linux**: Uses `xclip` or `xsel` (ensure one of these is installed)
-
-- **Windows**: Uses `clip`
+### sarcasm
 
 Alternates between uppercase and lowercase characters:
 
-## Aliases and Ruby Scripts
-
 ```bash
-
-sarcasm "this is sarcastic"The gem also supports the following aliases and Ruby scripts from Zsh:
-
+sarcasm "this is sarcastic"
 # Output: ThIs Is SaRcAsTiC
-
-```- `flip`: An alias for `rage_flip`.
-
-- `reverse`: Another alias that performs the same functionality.
+```
 
 ### strikethrough
 
-## Contributing
-
 Adds strikethrough formatting to text using Unicode combining characters:
 
-If you would like to contribute to the `rage_flip` gem, please fork the repository and submit a pull request. Make sure to include tests for any new features or bug fixes.
-
 ```bash
-
-strikethrough "crossed out text"## License
-
+strikethrough "crossed out text"
 # Output: c̶r̶o̶s̶s̶e̶d̶ ̶o̶u̶t̶ ̶t̶e̶x̶t̶
-
-```This project is licensed under the MIT License. See the LICENSE file for more details.
+```
 
 ### underline
 
