@@ -1,9 +1,10 @@
 module RageFlip
   class Chaos
     DEFAULT_CHAOS_LEVEL = 10
+    CHAOS_LEVEL_FILE = File.expand_path("~/.chaos_level.txt")
     
     def self.process(text, chaos_level = nil)
-      chaos_level ||= ENV['CHAOS_LEVEL']&.to_i || DEFAULT_CHAOS_LEVEL
+      chaos_level ||= read_chaos_level
       
       text.each_char.map do |c|
         combining_chars = rand(1..chaos_level).times.map do
@@ -14,18 +15,39 @@ module RageFlip
     end
     
     def self.set_chaos_level(instruction)
-      current_level = ENV['CHAOS_LEVEL']&.to_i || DEFAULT_CHAOS_LEVEL
+      current_level = read_chaos_level
       
       case instruction
       when 'more'
-        ENV['CHAOS_LEVEL'] = (current_level + 1).to_s
+        new_level = current_level + 1
       when 'less'
-        ENV['CHAOS_LEVEL'] = (current_level - 1).to_s
+        new_level = [current_level - 1, 1].max # Don't go below 1
       else
-        ENV['CHAOS_LEVEL'] = instruction.to_s
+        new_level = instruction.to_i
+        if new_level <= 0
+          return "Error: Chaos level must be a positive number"
+        end
       end
       
-      "chaos level is now #{ENV['CHAOS_LEVEL']}"
+      write_chaos_level(new_level)
+      "chaos level is now #{new_level}"
+    end
+    
+    def self.read_chaos_level
+      if File.exist?(CHAOS_LEVEL_FILE)
+        level = File.read(CHAOS_LEVEL_FILE).strip.to_i
+        level > 0 ? level : DEFAULT_CHAOS_LEVEL
+      else
+        DEFAULT_CHAOS_LEVEL
+      end
+    end
+    
+    def self.write_chaos_level(level)
+      File.write(CHAOS_LEVEL_FILE, level.to_s)
+    end
+    
+    def self.current_chaos_level
+      read_chaos_level
     end
   end
 end

@@ -53,9 +53,26 @@ RSpec.describe RageFlip do
   end
 
   describe RageFlip::Chaos do
+    let(:chaos_file) { File.expand_path("~/.chaos_level.txt") }
+    
+    before do
+      # Clean up chaos file before each test
+      File.delete(chaos_file) if File.exist?(chaos_file)
+    end
+    
+    after do
+      # Clean up chaos file after each test
+      File.delete(chaos_file) if File.exist?(chaos_file)
+    end
+
     describe '.process' do
       it 'adds combining characters for chaos effect' do
         result = RageFlip::Chaos.process('test', 5)
+        expect(result.length).to be > 4 # Should be longer than original
+      end
+      
+      it 'uses default chaos level when no file exists' do
+        result = RageFlip::Chaos.process('test')
         expect(result.length).to be > 4 # Should be longer than original
       end
     end
@@ -63,8 +80,40 @@ RSpec.describe RageFlip do
     describe '.set_chaos_level' do
       it 'sets chaos level to specific number' do
         result = RageFlip::Chaos.set_chaos_level('15')
-        expect(ENV['CHAOS_LEVEL']).to eq('15')
+        expect(File.read(chaos_file).strip).to eq('15')
         expect(result).to eq('chaos level is now 15')
+      end
+      
+      it 'increases chaos level with more' do
+        RageFlip::Chaos.set_chaos_level('10')
+        result = RageFlip::Chaos.set_chaos_level('more')
+        expect(File.read(chaos_file).strip).to eq('11')
+        expect(result).to eq('chaos level is now 11')
+      end
+      
+      it 'decreases chaos level with less' do
+        RageFlip::Chaos.set_chaos_level('10')
+        result = RageFlip::Chaos.set_chaos_level('less')
+        expect(File.read(chaos_file).strip).to eq('9')
+        expect(result).to eq('chaos level is now 9')
+      end
+      
+      it 'does not go below 1' do
+        RageFlip::Chaos.set_chaos_level('1')
+        result = RageFlip::Chaos.set_chaos_level('less')
+        expect(File.read(chaos_file).strip).to eq('1')
+        expect(result).to eq('chaos level is now 1')
+      end
+    end
+
+    describe '.read_chaos_level' do
+      it 'returns default when file does not exist' do
+        expect(RageFlip::Chaos.read_chaos_level).to eq(10)
+      end
+      
+      it 'reads level from file when it exists' do
+        File.write(chaos_file, '25')
+        expect(RageFlip::Chaos.read_chaos_level).to eq(25)
       end
     end
   end

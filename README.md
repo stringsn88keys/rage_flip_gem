@@ -86,13 +86,15 @@ chaos "chaotic text"
 # Output: c̸̰̈h̴̲̆a̷̰̋ò̶̰ẗ̸̲ḭ̷̋c̶̰̈ ̸̰̈t̷̰̋ĕ̴̲ẍ̸̰t̷̰̋
 ```
 
-The chaos level can be controlled with the `CHAOS_LEVEL` environment variable or the `chaos_level` command.
+The chaos level is persistently stored in `~/.chaos_level.txt` and can be controlled with the `chaos_level` command.
 
 ### chaos_level
 
 Controls the chaos level for the chaos command:
 
 ```bash
+chaos_level         # Show current chaos level
+chaos_level show    # Show current chaos level  
 chaos_level more    # Increase chaos level by 1
 chaos_level less    # Decrease chaos level by 1
 chaos_level 15      # Set chaos level to 15
@@ -119,9 +121,9 @@ The flip functionality uses comprehensive character mappings including:
 - Common punctuation and symbols
 - Special Unicode characters for upside-down equivalents
 
-## Environment Variables
+## Persistent Settings
 
-- `CHAOS_LEVEL`: Controls the intensity of the chaos effect (default: 10)
+- **Chaos Level**: Stored in `~/.chaos_level.txt` and controls the intensity of the chaos effect (default: 10). This setting persists across terminal sessions and system reboots.
 
 ## Library Usage
 

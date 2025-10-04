@@ -9,8 +9,7 @@ if text.empty?
   exit 1
 end
 
-chaos_level = ENV['CHAOS_LEVEL']&.to_i || 10
-result = RageFlip::Chaos.process(text, chaos_level)
+result = RageFlip::Chaos.process(text)
 
 if RageFlip::Clipboard.copy(result)
   puts result
