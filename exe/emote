@@ -7,25 +7,45 @@ if ARGV.length == 0
   exit 0
 end
 
-emote_name = ARGV[0].downcase
-
-if emote_name == "list"
+# Handle "list" command
+if ARGV.length == 1 && ARGV[0].downcase == "list"
   puts RageFlip::Emote.list_emotes
   exit 0
 end
 
-result = RageFlip::Emote.process(emote_name)
+# Process multiple emote arguments
+results = []
+unknown_emotes = []
 
-if result
+ARGV.each do |arg|
+  emote_name = arg.downcase
+  result = RageFlip::Emote.process(emote_name)
+  
+  if result
+    results << result
+  else
+    unknown_emotes << emote_name
+  end
+end
+
+if unknown_emotes.any?
+  puts "Unknown emote(s): #{unknown_emotes.join(', ')}"
+  puts ""
+  puts RageFlip::Emote.list_emotes
+  exit 1
+end
+
+if results.any?
+  # Concatenate all results with no spaces
+  final_result = results.join("")
+  
   # Copy to clipboard
-  if RageFlip::Clipboard.copy(result)
+  if RageFlip::Clipboard.copy(final_result)
   else
     puts "Failed to copy to clipboard, but here's your emote:"
   end
-  puts result
+  puts final_result
 else
-  puts "Unknown emote: #{emote_name}"
-  puts ""
-  puts RageFlip::Emote.list_emotes
+  puts "No valid emotes found"
   exit 1
 end
