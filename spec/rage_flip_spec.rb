@@ -16,6 +16,24 @@ RSpec.describe RageFlip do
         expect(result).to include('┻')
       end
     end
+
+    describe '.table_flip' do
+      it 'adds table flip emoticons to flipped text' do
+        result = RageFlip::Flipper.table_flip('test')
+        expect(result).to include('(╯°□°)╯︵')
+        expect(result).to include('┻━┻')
+        expect(result).to include('ʇsǝʇ') # flipped version of 'test'
+      end
+    end
+
+    describe '.flip_text' do
+      it 'flips text without any emoticons' do
+        result = RageFlip::Flipper.flip_text('test')
+        expect(result).to eq('ʇsǝʇ')
+        expect(result).not_to include('(')
+        expect(result).not_to include('┻')
+      end
+    end
   end
 
   describe RageFlip::Sarcasm do
@@ -114,6 +132,56 @@ RSpec.describe RageFlip do
       it 'reads level from file when it exists' do
         File.write(chaos_file, '25')
         expect(RageFlip::Chaos.read_chaos_level).to eq(25)
+      end
+    end
+  end
+
+  describe RageFlip::Emote do
+    describe '.process' do
+      it 'returns correct emote for disapproval' do
+        result = RageFlip::Emote.process('disapproval')
+        expect(result).to eq('(ಠ_ಠ)')
+      end
+
+      it 'returns correct emote for bullshit' do
+        result = RageFlip::Emote.process('bullshit')
+        expect(result).to eq('🐄💩')
+      end
+
+      it 'returns correct emote for dogshit' do
+        result = RageFlip::Emote.process('dogshit')
+        expect(result).to eq('🐶💩')
+      end
+
+      it 'handles case insensitive input' do
+        result = RageFlip::Emote.process('DISAPPROVAL')
+        expect(result).to eq('(ಠ_ಠ)')
+      end
+
+      it 'returns nil for unknown emote' do
+        result = RageFlip::Emote.process('unknown')
+        expect(result).to be_nil
+      end
+    end
+
+    describe '.list_emotes' do
+      it 'returns formatted list of all emotes' do
+        result = RageFlip::Emote.list_emotes
+        expect(result).to include('Available emotes:')
+        expect(result).to include('disapproval')
+        expect(result).to include('(ಠ_ಠ)')
+        expect(result).to include('bullshit')
+        expect(result).to include('🐄💩')
+      end
+    end
+
+    describe '.emote_exists?' do
+      it 'returns true for existing emote' do
+        expect(RageFlip::Emote.emote_exists?('disapproval')).to be true
+      end
+
+      it 'returns false for non-existing emote' do
+        expect(RageFlip::Emote.emote_exists?('nonexistent')).to be false
       end
     end
   end

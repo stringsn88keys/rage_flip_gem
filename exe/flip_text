@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/rage_flip'
+
+text = ARGV.join(' ')
+
+if text.empty?
+  puts "Usage: flip_text <text_to_flip>"
+  exit 1
+end
+
+# Just flip the text without any emoticons
+result = RageFlip::Flipper.flip_text(text)
+
+# Copy to clipboard
+if RageFlip::Clipboard.copy(result)
+  puts result
+else
+  puts "Failed to copy to clipboard, but here's your flipped text:"
+  puts result
+end

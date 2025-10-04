@@ -41,6 +41,48 @@ The flip transformation:
 - Maps characters to their upside-down equivalents
 - Wraps the result with `(ノಠ益ಠ)ノ彡┻` and `┻`
 
+### table_flip
+
+The classic table flip command flips text upside down with the iconic table flip emoticons:
+
+```bash
+table_flip "Hello World"
+# Output: (╯°□°)╯︵ plɹoM ollǝH ┻━┻
+# Result is automatically copied to clipboard
+```
+
+Uses the classic `(╯°□°)╯︵` and `┻━┻` emoticons for a more traditional table flip style.
+
+### flip_text
+
+Flips text upside down without any emoticons:
+
+```bash
+flip_text "Hello World"
+# Output: plɹoM ollǝH
+# Result is automatically copied to clipboard
+```
+
+Just the pure flipped text without any rage or table flip decorations.
+
+### emote
+
+The emote system provides various emoticons and emoji sequences:
+
+```bash
+emote                    # List all available emotes
+emote list               # List all available emotes  
+emote disapproval        # Output: (ಠ_ಠ)
+emote bullshit           # Output: 🐄💩
+emote catshit            # Output: �💩
+emote dogshit            # Output: �💩
+emote pandashit          # Output: 🐼💩
+emote horseshit          # Output: 🐴💩
+emote batshit            # Output: 🦇💩
+```
+
+All emotes are accessed through the `emote` command followed by the emote name.
+
 ### sarcasm
 
 Alternates between uppercase and lowercase characters:
@@ -136,8 +178,16 @@ require 'rage_flip'
 RageFlip::Flipper.rage_flip("Hello World")
 # => "(ノಠ益ಠ)ノ彡┻plɹoM ollǝH┻"
 
+# Flip text with classic table flip emoticons  
+RageFlip::Flipper.table_flip("Hello World")
+# => "(╯°□°)╯︵ plɹoM ollǝH ┻━┻"
+
 # Just flip without emoticons
 RageFlip::Flipper.flip("Hello")
+# => "ollǝH"
+
+# Flip text (same as flip)
+RageFlip::Flipper.flip_text("Hello")
 # => "ollǝH"
 
 # Sarcastic text
@@ -158,6 +208,16 @@ RageFlip::Underline.double_underline("text")
 # Chaos
 RageFlip::Chaos.process("text", 5)
 # => "t̸e̷x̸t̷"
+
+# Emotes
+RageFlip::Emote.process("disapproval")
+# => "(ಠ_ಠ)"
+
+RageFlip::Emote.process("bullshit")
+# => "🐄💩"
+
+RageFlip::Emote.list_emotes
+# => "Available emotes:\n  disapproval  - (ಠ_ಠ)\n  bullshit     - 🐄💩\n..."
 
 # Copy to clipboard
 RageFlip::Clipboard.copy("text to copy")

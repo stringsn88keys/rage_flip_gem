@@ -8,6 +8,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- `flip_text` command for flipping text without any emoticons
+- `emote` command system with disapproval and animal+poop combinations
+- `emote disapproval` outputs `(ಠ_ಠ)`
+- `emote bullshit`, `catshit`, `dogshit`, `pandashit`, `horseshit`, `batshit` commands
+- `emote list` to display all available emotes
+- `table_flip` command with classic `(╯°□°)╯︵` and `┻━┻` emoticons
+
+## [1.0.1] - 2025-10-04
+
+### Added
+- Persistent chaos level storage in `~/.chaos_level.txt`
+- `chaos_level show` command to display current chaos level
+- Chaos level minimum enforcement (cannot go below 1)
+
+### Changed
+- Chaos level now persists across terminal sessions and reboots
+- Removed dependency on `CHAOS_LEVEL` environment variable
+
+## [1.0.0] - 2025-10-03
+
+### Added
 - Version management and release automation
 
 ## [1.0.0] - 2025-10-03

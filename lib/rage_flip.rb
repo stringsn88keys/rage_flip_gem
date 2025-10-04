@@ -5,6 +5,7 @@ require_relative "rage_flip/strikethrough"
 require_relative "rage_flip/underline"
 require_relative "rage_flip/chaos"
 require_relative "rage_flip/clipboard"
+require_relative "rage_flip/emote"
 require 'shellwords'
 
 module RageFlip

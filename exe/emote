@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/rage_flip'
+
+if ARGV.length == 0
+  puts RageFlip::Emote.list_emotes
+  exit 0
+end
+
+emote_name = ARGV[0].downcase
+
+if emote_name == 'list'
+  puts RageFlip::Emote.list_emotes
+  exit 0
+end
+
+result = RageFlip::Emote.process(emote_name)
+
+if result
+  # Copy to clipboard
+  if RageFlip::Clipboard.copy(result)
+    puts result
+  else
+    puts "Failed to copy to clipboard, but here's your emote:"
+    puts result
+  end
+else
+  puts "Unknown emote: #{emote_name}"
+  puts ""
+  puts RageFlip::Emote.list_emotes
+  exit 1
+end
