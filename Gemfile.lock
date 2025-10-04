@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rage_flip (0.1.0)
+    rage_flip (1.0.0)
 
 GEM
   remote: https://rubygems.org/
@@ -28,8 +28,8 @@ PLATFORMS
 
 DEPENDENCIES
   rage_flip!
-  rake
-  rspec
+  rake (~> 13.0, >= 0)
+  rspec (~> 3.0, >= 0)
 
 BUNDLED WITH
    2.7.1

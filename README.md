@@ -165,6 +165,65 @@ RageFlip::Clipboard.copy("text to copy")
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests.
 
+### Version Management
+
+The gem includes comprehensive version management tools:
+
+#### Rake Tasks
+
+```bash
+# Show current version
+rake version:show
+
+# Bump patch version (1.0.0 -> 1.0.1)
+rake version:bump:patch
+
+# Bump minor version (1.0.0 -> 1.1.0)  
+rake version:bump:minor
+
+# Bump major version (1.0.0 -> 2.0.0)
+rake version:bump:major
+
+# Set specific version
+rake version:set[1.2.3]
+```
+
+#### Version Script
+
+```bash
+# Show current version
+./bin/version show
+
+# Bump versions
+./bin/version patch
+./bin/version minor  
+./bin/version major
+
+# Set specific version
+./bin/version set 1.2.3
+```
+
+#### Release Process
+
+```bash
+# Complete release workflow
+rake release
+# This will: run tests, build gem, create git tag
+```
+
+### Automated CI/CD
+
+The project includes GitHub Actions workflows for:
+- **Continuous Integration**: Runs tests on Ruby 3.0, 3.1, and 3.2
+- **Automated Releases**: Creates GitHub releases when commits start with "Release v"
+
+To create a release:
+1. Bump the version: `./bin/version minor`
+2. Update CHANGELOG.md with changes
+3. Commit: `git commit -am "Release v1.1.0"`  
+4. Push: `git push origin main`
+5. The CI will automatically create a GitHub release with the built gem
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/stringsn88keys/rage_flip_gem.

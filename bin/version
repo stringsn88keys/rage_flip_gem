@@ -1,0 +1,88 @@
+#!/usr/bin/env ruby
+
+# Version bump script for rage_flip gem
+# Usage: ./bin/version [major|minor|patch|show|set X.Y.Z]
+
+require_relative '../lib/rage_flip/version'
+
+def bump_version(type)
+  current = RageFlip::VERSION.split('.').map(&:to_i)
+  
+  case type
+  when 'patch'
+    current[2] += 1
+  when 'minor'
+    current[1] += 1
+    current[2] = 0
+  when 'major'
+    current[0] += 1
+    current[1] = 0
+    current[2] = 0
+  else
+    puts "Error: Invalid bump type '#{type}'. Use: major, minor, or patch"
+    exit 1
+  end
+  
+  new_version = current.join('.')
+  update_version_file(new_version)
+  
+  puts "Version bumped from #{RageFlip::VERSION} to #{new_version}"
+  puts ""
+  puts "Next steps:"
+  puts "  git add lib/rage_flip/version.rb"
+  puts "  git commit -m 'Bump version to v#{new_version}'"
+  puts "  git tag v#{new_version}"
+  puts "  git push origin main --tags"
+end
+
+def update_version_file(new_version)
+  version_file = File.expand_path('../lib/rage_flip/version.rb', __dir__)
+  content = File.read(version_file)
+  
+  updated_content = content.gsub(
+    /VERSION = "[^"]+"/, 
+    "VERSION = \"#{new_version}\""
+  )
+  
+  File.write(version_file, updated_content)
+end
+
+def show_version
+  puts "Current version: #{RageFlip::VERSION}"
+end
+
+def set_version(version)
+  unless version.match?(/^\d+\.\d+\.\d+$/)
+    puts "Error: Version must be in format X.Y.Z (e.g., 1.2.3)"
+    exit 1
+  end
+  
+  old_version = RageFlip::VERSION
+  update_version_file(version)
+  puts "Version changed from #{old_version} to #{version}"
+end
+
+# Main script
+case ARGV[0]
+when 'major', 'minor', 'patch'
+  bump_version(ARGV[0])
+when 'show', nil
+  show_version
+when 'set'
+  if ARGV[1].nil?
+    puts "Error: Please specify version number"
+    puts "Usage: #{$0} set X.Y.Z"
+    exit 1
+  end
+  set_version(ARGV[1])
+else
+  puts "Usage: #{$0} [major|minor|patch|show|set X.Y.Z]"
+  puts ""
+  puts "Commands:"
+  puts "  major  - Bump major version (1.0.0 -> 2.0.0)"
+  puts "  minor  - Bump minor version (1.0.0 -> 1.1.0)"  
+  puts "  patch  - Bump patch version (1.0.0 -> 1.0.1)"
+  puts "  show   - Show current version"
+  puts "  set    - Set specific version (e.g., set 1.2.3)"
+  exit 1
+end

@@ -1,0 +1,77 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby-version: ['3.0', '3.1', '3.2']
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: true
+
+    - name: Install dependencies
+      run: bundle install
+
+    - name: Run tests
+      run: bundle exec rspec
+
+    - name: Build gem
+      run: bundle exec rake build
+
+  release:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && startsWith(github.event.head_commit.message, 'Release v')
+    
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.2'
+        bundler-cache: true
+
+    - name: Build gem
+      run: bundle exec rake build
+
+    - name: Extract version from commit message
+      id: version
+      run: |
+        VERSION=$(echo "${{ github.event.head_commit.message }}" | grep -oP 'Release v\K[\d.]+')
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+    - name: Create GitHub Release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        VERSION="${{ steps.version.outputs.version }}"
+        CHANGELOG=$(git log --oneline --since="$(git describe --tags --abbrev=0 HEAD~1 2>/dev/null || echo 'HEAD~10')" --pretty=format:"- %s" | grep -v "Release v")
+        
+        gh release create "v${VERSION}" \
+          --title "Release v${VERSION}" \
+          --notes "## Changes in v${VERSION}
+        
+        ${CHANGELOG:-No changes listed}
+        
+        ## Installation
+        
+        \`\`\`bash
+        gem install rage_flip -v ${VERSION}
+        \`\`\`" \
+          ./rage_flip-*.gem
