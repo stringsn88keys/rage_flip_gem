@@ -7,10 +7,19 @@ if ARGV.length == 0
   exit 0
 end
 
-# Handle "list" command
-if ARGV.length == 1 && ARGV[0].downcase == "list"
-  puts RageFlip::Emote.list_emotes
-  exit 0
+# Handle single argument commands
+if ARGV.length == 1
+  case ARGV[0].downcase
+  when "list"
+    puts RageFlip::Emote.list_emotes
+    exit 0
+  when "list-custom"
+    puts RageFlip::Emote.list_custom_emotes
+    exit 0
+  when "init-custom"
+    puts RageFlip::Emote.init_custom_config
+    exit 0
+  end
 end
 
 # Process multiple emote arguments
