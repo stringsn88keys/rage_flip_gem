@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rage_flip (1.1.0)
+    rage_flip (1.4.0)
 
 GEM
   remote: https://rubygems.org/
@@ -71,6 +71,7 @@ GEM
 PLATFORMS
   arm64-darwin-22
   ruby
+  x64-mingw-ucrt
 
 DEPENDENCIES
   rage_flip!
