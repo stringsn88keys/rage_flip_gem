@@ -15,6 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `emote list` to display all available emotes
 - `table_flip` command with classic `(╯°□°)╯︵` and `┻━┻` emoticons
 
+### Fixed
+- **Windows Unicode Support**: Fixed clipboard handling of Unicode characters on Windows by implementing proper UTF-16LE encoding with BOM. This resolves issues where Unicode characters (rage flip emoticons, flipped text characters, emoji, accented characters, etc.) would not copy correctly to the Windows clipboard.
+
 ## [1.0.1] - 2025-10-04
 
 ### Added

@@ -194,9 +194,21 @@ The gem automatically detects your platform and uses the appropriate clipboard c
 
 - **macOS**: Uses `pbcopy`
 - **Linux**: Uses `xclip` or `xsel` (install one of these first)
-- **Windows**: Uses `clip`
+- **Windows**: Uses `clip` with proper UTF-16LE encoding for Unicode support
 
 All commands automatically copy their output to the clipboard and display the result.
+
+### Unicode Support on Windows
+
+The Windows clipboard implementation has been specifically enhanced to handle Unicode characters correctly. The gem automatically converts text to UTF-16LE encoding with BOM (Byte Order Mark) before passing it to the Windows `clip` command. This ensures that Unicode characters such as:
+
+- Rage flip emoticons: `(ノಠ益ಠ)ノ彡┻━┻`
+- Flipped text characters: `ʇsǝʇ` 
+- Emoji characters: `🐄💩`
+- Accented characters: `café résumé naïve`
+- International text: `こんにちは`, `测试文本`
+
+...are properly preserved when copied to the clipboard and can be pasted correctly into other applications.
 
 ## Character Mappings
 
