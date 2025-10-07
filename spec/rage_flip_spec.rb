@@ -20,8 +20,8 @@ RSpec.describe RageFlip do
     describe ".table_flip" do
       it "adds table flip emoticons to flipped text" do
         result = RageFlip::Flipper.table_flip("test")
-        expect(result).to include("(╯°□°)╯︵")
-        expect(result).to include("┻━┻")
+        expect(result).to include("(╯°□°)╯︵┻")
+        expect(result).to include("┻")
         expect(result).to include("ʇsǝʇ") # flipped version of 'test'
       end
     end

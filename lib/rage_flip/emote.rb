@@ -80,7 +80,7 @@ module RageFlip
 
     def self.process(emote_name)
       emote_name = emote_name.downcase
-      
+
       if all_emotes.key?(emote_name)
         all_emotes[emote_name]
       end
@@ -102,7 +102,7 @@ module RageFlip
 
     def self.list_custom_emotes
       custom_emotes = load_custom_emotes
-      
+
       if custom_emotes.empty?
         return "No custom emotes found. Use 'emote init-custom' to create a custom emote config file."
       end
@@ -117,19 +117,19 @@ module RageFlip
       sorted_emotes.each do |name, emote|
         output << "  #{name.ljust(max_name_length + 2)} - #{emote}"
       end
-      
+
       config_path = custom_config_path
       if config_path
         output << ""
         output << "Config file: #{config_path}"
       end
-      
+
       output.join("\n")
     end
 
     def self.init_custom_config
       FileUtils.mkdir_p(CONFIG_DIR) unless Dir.exist?(CONFIG_DIR)
-      
+
       if File.exist?(JSON_CONFIG_FILE) || File.exist?(YAML_CONFIG_FILE)
         existing_file = File.exist?(JSON_CONFIG_FILE) ? JSON_CONFIG_FILE : YAML_CONFIG_FILE
         return "Custom emote config already exists: #{existing_file}"
@@ -144,7 +144,7 @@ module RageFlip
 
       File.write(JSON_CONFIG_FILE, JSON.pretty_generate(sample_config))
       refresh_emotes
-      
+
       "Custom emote config initialized: #{JSON_CONFIG_FILE}\n" +
       "Edit this file to add your custom emotes, then use 'emote list-custom' to see them."
     end

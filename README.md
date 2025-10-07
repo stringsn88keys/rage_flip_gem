@@ -47,7 +47,7 @@ The classic table flip command flips text upside down with the iconic table flip
 
 ```bash
 table_flip "Hello World"
-# Output: (╯°□°)╯︵ plɹoM ollǝH ┻━┻
+# Output: (╯°□°)╯︵┻plɹoM ollǝH┻
 # Result is automatically copied to clipboard
 ```
 
