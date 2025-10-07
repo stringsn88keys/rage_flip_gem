@@ -25,6 +25,7 @@ module RageFlip
       "heresatable" => "┬─┬ ノ( ゜-゜ノ)",
       "javaflip" => "(╯°□°)╯︵ ┻ɐʌɐɾ┻",
       "kungfuhamster" => "    ()__()\n    / o o\\   ;\n   |'=Y=';-/\n   { \\  / }\n    mmm mmm   ",
+      "middlefinger" => "🖕",
       "noevil" => "🙈🙉🙊",
       "omw" => "On my way!",
       "optn" => "⌥",
