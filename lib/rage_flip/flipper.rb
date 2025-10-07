@@ -31,8 +31,8 @@ module RageFlip
     end
 
     def self.table_flip(text)
-      table_flip_front = "(╯°□°)╯︵ "
-      table_flip_back = " ┻━┻"
+      table_flip_front = "(╯°□°)╯︵┻"
+      table_flip_back = " ┻"
 
       "#{table_flip_front}#{flip(text)}#{table_flip_back}"
     end
