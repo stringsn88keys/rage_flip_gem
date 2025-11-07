@@ -13,6 +13,7 @@ module RageFlip
       "horseshit" => "🐴💩",
       "koalashit" => "🐨💩",
       "batshit" => "🦇💩",
+      "shboatload" => "💩🚢",
       "bugeyes" => "(⊙_◎)",
       "cmd-" => "⌘-",
       "cmd" => "⌘",
