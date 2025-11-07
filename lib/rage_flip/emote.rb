@@ -27,6 +27,8 @@ module RageFlip
       "kungfuhamster" => "    ()__()\n    / o o\\   ;\n   |'=Y=';-/\n   { \\  / }\n    mmm mmm   ",
       "middlefinger" => "🖕",
       "noevil" => "🙈🙉🙊",
+      "omg" => "😱",
+      "omgcat" => "🙀",
       "omw" => "On my way!",
       "optn" => "⌥",
       "option" => "⌥",
