@@ -10,6 +10,7 @@ module RageFlip
       "catshit" => "🐱💩",
       "dogshit" => "🐶💩",
       "pandashit" => "🐼💩",
+      "popcorn" => "🍿",
       "horseshit" => "🐴💩",
       "koalashit" => "🐨💩",
       "batshit" => "🦇💩",
@@ -18,6 +19,7 @@ module RageFlip
       "cmd-" => "⌘-",
       "cmd" => "⌘",
       "command" => "⌘",
+      "deer" => "🦌",
       "cntl" => "⌃",
       "dogshrug" => '¯\_🐶_/¯',
       "facepalm" => "(－‸ლ)",
@@ -80,14 +82,78 @@ module RageFlip
 
     def self.refresh_emotes
       @all_emotes = nil
+      @emoji_only_emotes = nil
+    end
+
+    # Check if an emote value contains only emoji (no ASCII art or text)
+    def self.emoji_only?(value)
+      # Remove all emoji and see if anything is left (besides spaces)
+      # This regex matches emoji characters
+      value.gsub(/[\p{Emoji}\p{Emoji_Presentation}\p{Emoji_Modifier}\p{Emoji_Component}]/, '').strip.empty?
+    end
+
+    # Get all emoji-only emotes
+    def self.emoji_only_emotes
+      @emoji_only_emotes ||= all_emotes.select { |name, value| emoji_only?(value) }
+    end
+
+    # Try to split a compound emote name into parts
+    # Returns an array of emote values if successful, nil otherwise
+    def self.split_compound_emote(compound_name)
+      # First try splitting by hyphen
+      if compound_name.include?('-')
+        parts = compound_name.split('-')
+        results = parts.map { |part| all_emotes[part] }
+        return results if results.all? && results.all? { |r| emoji_only?(r) }
+      end
+
+      # Try to find a combination of emoji-only emotes without separator
+      # Use dynamic programming to find valid splits
+      return find_emote_combination(compound_name)
+    end
+
+    # Find a valid combination of emoji-only emotes that match the compound name
+    def self.find_emote_combination(name, start = 0, memo = {})
+      return [] if start >= name.length
+      return memo[[name, start]] if memo.key?([name, start])
+
+      # Try each emoji-only emote starting at this position
+      emoji_only_emotes.each do |emote_name, emote_value|
+        next unless name[start..-1].start_with?(emote_name)
+
+        rest_start = start + emote_name.length
+        if rest_start >= name.length
+          # We've matched the entire string
+          memo[[name, start]] = [emote_value]
+          return [emote_value]
+        end
+
+        # Try to match the rest
+        rest = find_emote_combination(name, rest_start, memo)
+        if rest
+          result = [emote_value] + rest
+          memo[[name, start]] = result
+          return result
+        end
+      end
+
+      memo[[name, start]] = nil
+      nil
     end
 
     def self.process(emote_name)
       emote_name = emote_name.downcase
 
+      # First check if it exists as-is
       if all_emotes.key?(emote_name)
-        all_emotes[emote_name]
+        return all_emotes[emote_name]
       end
+
+      # Try to split as compound emote
+      compound_result = split_compound_emote(emote_name)
+      return compound_result.join('') if compound_result
+
+      nil
     end
 
     def self.list_emotes

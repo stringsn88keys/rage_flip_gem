@@ -127,6 +127,82 @@ emote yuno               # Output: ლ(ಠ益ಠლ)
 
 All emotes are accessed through the `emote` command followed by the emote name. Use `emote list` to see the complete collection of available emotes.
 
+#### Multi-Emote Combinations
+
+The emote system supports combining multiple emoji-only emotes into compound expressions. This allows you to create custom combinations on the fly:
+
+**With Hyphens:**
+```bash
+emote bullshit-catshit    # Output: 🐄💩🐱💩
+emote omg-cat             # Output: 😱🐱
+emote dog-panda-cat       # Output: 🐶🐼🐱
+```
+
+**Without Separators:**
+```bash
+emote bullshitcatshit     # Output: 🐄💩🐱💩
+emote omgcat              # Output: 😱🐱 (also available as a standalone emote)
+emote dogpandacat         # Output: 🐶🐼🐱
+```
+
+The system uses dynamic programming to automatically detect and combine emoji-only emotes. Note that:
+- Only emoji-only emotes can be combined (ASCII art emotes like `shrug` or `kungfuhamster` cannot be combined)
+- The longest matching emote names are prioritized
+- If an exact emote name exists (like `omgcat`), it will be used instead of parsing as a combination
+
+**Example emoji-only emotes that can be combined:**
+`bullshit`, `catshit`, `dogshit`, `pandashit`, `horseshit`, `koalashit`, `batshit`, `shboatload`, `popcorn`, `omg`, `omgcat`, `deer`, `middlefinger`, `noevil`
+
+#### Custom Emotes
+
+You can define your own custom emotes that persist across sessions:
+
+```bash
+# Initialize a custom emote configuration file
+emote init-custom
+# Creates ~/.config/rage_flip/emote.json with sample emotes
+
+# List only your custom emotes
+emote list-custom
+# Shows all custom emotes and the config file location
+```
+
+**Configuration Format:**
+
+Custom emotes can be defined in either JSON or YAML format:
+
+**JSON** (`~/.config/rage_flip/emote.json`):
+```json
+{
+  "myemote": "🎉🎊",
+  "team": "👥💪",
+  "coffee": "☕"
+}
+```
+
+**YAML** (`~/.config/rage_flip/emote.yml`):
+```yaml
+myemote: "🎉🎊"
+team: "👥💪"
+coffee: "☕"
+```
+
+Custom emotes:
+- Are automatically merged with built-in emotes
+- Can override built-in emotes (use with caution)
+- Support all emoji and Unicode characters
+- Work with multi-emote combinations if they are emoji-only
+- Persist across terminal sessions and system reboots
+
+**Usage:**
+```bash
+emote myemote           # Output: 🎉🎊
+emote coffee            # Output: ☕
+emote team-coffee       # Multi-emote combination: 👥💪☕
+```
+
+The `init-custom` command creates a sample configuration file with examples to get you started. Edit the file to add your own custom emotes, then use `emote list` to see all available emotes (both built-in and custom) or `emote list-custom` to see only your custom emotes.
+
 ### sarcasm
 
 Alternates between uppercase and lowercase characters:
@@ -299,6 +375,16 @@ RageFlip::Emote.process("cmd")
 RageFlip::Emote.process("shrug")
 # => "¯\_(ツ)_/¯"
 
+# Multi-emote combinations
+RageFlip::Emote.process("bullshit-catshit")
+# => "🐄💩🐱💩"
+
+RageFlip::Emote.process("bullshitcatshit")
+# => "🐄💩🐱💩"
+
+RageFlip::Emote.process("omg-deer-popcorn")
+# => "😱🦌🍿"
+
 RageFlip::Emote.list_emotes
 # => "Available emotes:\n  batshit      - 🦇💩\n  bugeyes      - (⊙_◎)\n..."
 
@@ -309,6 +395,22 @@ RageFlip::Emote.emote_exists?("rage")
 # Get all emote names
 RageFlip::Emote.emote_names
 # => ["disapproval", "bullshit", "catshit", ...]
+
+# Custom emotes
+RageFlip::Emote.init_custom_config
+# => "Custom emote config initialized: ~/.config/rage_flip/emote.json\nEdit this file..."
+
+RageFlip::Emote.list_custom_emotes
+# => "Custom emotes:\n  myemote    - 🎉🎊\n..."
+
+RageFlip::Emote.load_custom_emotes
+# => {"myemote" => "🎉🎊", "team" => "👥💪", ...}
+
+RageFlip::Emote.all_emotes
+# => {"disapproval" => "(ಠ_ಠ)", "bullshit" => "🐄💩", "myemote" => "🎉🎊", ...}
+
+RageFlip::Emote.refresh_emotes
+# Reloads custom emotes from disk (useful after editing config file)
 
 # Copy to clipboard
 RageFlip::Clipboard.copy("text to copy")
