@@ -19,7 +19,19 @@ if ARGV.length == 1
   when "init-custom"
     puts RageFlip::Emote.init_custom_config
     exit 0
+  when "categories"
+    puts RageFlip::Emote.list_categories
+    exit 0
+  when "help", "-h", "--help"
+    puts RageFlip::Emote.show_help
+    exit 0
   end
+end
+
+# Handle two argument commands
+if ARGV.length == 2 && ARGV[0].downcase == "category"
+  puts RageFlip::Emote.list_category(ARGV[1])
+  exit 0
 end
 
 # Process multiple emote arguments

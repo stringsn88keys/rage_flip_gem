@@ -71,7 +71,9 @@ The emote system provides a comprehensive collection of emoticons, text substitu
 
 ```bash
 emote                    # List all available emotes
-emote list               # List all available emotes  
+emote list               # List all available emotes
+emote categories         # List all emote categories
+emote category food      # List emotes in the food category
 emote disapproval        # Output: (ಠ_ಠ)
 emote rage               # Output: ಠ益ಠ
 emote flip               # Output: (╯°□°)╯︵ ┻━┻
@@ -152,6 +154,60 @@ The system uses dynamic programming to automatically detect and combine emoji-on
 
 **Example emoji-only emotes that can be combined:**
 `bullshit`, `catshit`, `dogshit`, `pandashit`, `horseshit`, `koalashit`, `batshit`, `shboatload`, `popcorn`, `omg`, `omgcat`, `deer`, `middlefinger`, `noevil`
+
+#### Emote Categories
+
+The emote collection is organized into categories to help you discover and browse the 1,600+ available emotes:
+
+```bash
+# List all available categories
+emote categories
+# Shows all categories with descriptions and emote counts
+
+# List emotes in a specific category
+emote category food
+# Shows all food & drink related emotes
+
+emote category animals
+# Shows all animal & nature emotes
+```
+
+**Available Categories:**
+
+- **custom** - Custom ASCII Art and Text Emotes (17 emotes)
+  - Classic text-based emotes like `shrug`, `flip`, `disapproval`, `kungfuhamster`
+
+- **keyboard** - Keyboard Shortcuts (8 emotes)
+  - Mac keyboard symbols: `cmd`, `option`, `shift`, `control`
+
+- **smileys** - Smileys & People (215 emotes)
+  - Emoji faces and people: `smile`, `laugh`, `wink`, `thumbsup`, `facepalm`, etc.
+
+- **animals** - Animals & Nature (210 emotes)
+  - Animals, plants, and nature: `cat`, `dog`, `deer`, `tree`, `flower`, etc.
+
+- **combined** - Combined/Custom Emotes (9 emotes)
+  - Special combinations: `bullshit`, `catshit`, `dogshit`, `omgcat`, etc.
+
+- **food** - Food & Drink (132 emotes)
+  - Food and beverages: `pizza`, `beer`, `coffee`, `taco`, `popcorn`, etc.
+
+- **activity** - Activity (101 emotes)
+  - Sports and activities: `soccer`, `basketball`, `running`, `gaming`, etc.
+
+- **travel** - Travel & Places (209 emotes)
+  - Locations and transportation: `car`, `plane`, `building`, `mountain`, etc.
+
+- **objects** - Objects (242 emotes)
+  - Everyday objects: `phone`, `computer`, `book`, `gift`, etc.
+
+- **symbols** - Symbols (216 emotes)
+  - Symbols and signs: `heart`, `star`, `check`, `warning`, etc.
+
+- **flags** - Flags (261 emotes)
+  - Country and regional flags: `usa`, `canada`, `uk`, `japan`, etc.
+
+Use `emote categories` to see the full list with emote counts, or `emote category <name>` to explore emotes within a specific category. This makes it easy to discover new emotes without having to browse the entire collection.
 
 #### Custom Emotes
 
