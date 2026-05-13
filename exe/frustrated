@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+
+require_relative "../lib/rage_flip"
+
+text = ARGV.join(" ")
+
+if text.empty?
+  puts "Usage: frustrated <text_to_frustrated>"
+  exit 1
+end
+
+result = RageFlip::Frustrated.process(text)
+
+if RageFlip::Clipboard.copy(result)
+else
+  puts "Failed to copy to clipboard, but here's your frustrated text:"
+end
+puts result

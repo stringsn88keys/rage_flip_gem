@@ -45,6 +45,25 @@ RSpec.describe RageFlip do
     end
   end
 
+  describe RageFlip::Frustrated do
+    describe ".process" do
+      it "uppercases words and joins with periods" do
+        result = RageFlip::Frustrated.process("one more day")
+        expect(result).to eq("ONE. MORE. DAY.")
+      end
+
+      it "handles single word" do
+        result = RageFlip::Frustrated.process("hello")
+        expect(result).to eq("HELLO.")
+      end
+
+      it "handles multiple spaces" do
+        result = RageFlip::Frustrated.process("why  is  this")
+        expect(result).to eq("WHY. IS. THIS.")
+      end
+    end
+  end
+
   describe RageFlip::Strikethrough do
     describe ".process" do
       it "adds strikethrough characters" do

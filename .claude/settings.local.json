@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ruby exe/emote:*)",
+      "Bash(rake version:bump:minor:*)",
+      "Bash(bundle exec *)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
