@@ -1911,6 +1911,18 @@ module RageFlip
     def self.refresh_emotes
       @all_emotes = nil
       @emoji_only_emotes = nil
+      @emote_by_first_char = nil
+      @compound_memo = nil
+    end
+
+    def self.emote_by_first_char
+      @emote_by_first_char ||= emoji_only_emotes.each_with_object(Hash.new { |h, k| h[k] = [] }) do |(name, value), h|
+        h[name[0]] << [name, value]
+      end
+    end
+
+    def self.compound_memo
+      @compound_memo ||= {}
     end
 
     # Check if an emote value contains only emoji (no ASCII art or text)
@@ -1941,22 +1953,21 @@ module RageFlip
     end
 
     # Find a valid combination of emoji-only emotes that match the compound name
-    def self.find_emote_combination(name, start = 0, memo = {})
+    def self.find_emote_combination(name, start = 0, memo = compound_memo)
       return [] if start >= name.length
       return memo[[name, start]] if memo.key?([name, start])
 
-      # Try each emoji-only emote starting at this position
-      emoji_only_emotes.each do |emote_name, emote_value|
-        next unless name[start..-1].start_with?(emote_name)
+      # Only check emotes whose name starts with the same character — avoids O(n) scan
+      candidates = emote_by_first_char[name[start]] || []
+      candidates.each do |emote_name, emote_value|
+        next unless name[start..].start_with?(emote_name)
 
         rest_start = start + emote_name.length
         if rest_start >= name.length
-          # We've matched the entire string
           memo[[name, start]] = [emote_value]
           return [emote_value]
         end
 
-        # Try to match the rest
         rest = find_emote_combination(name, rest_start, memo)
         if rest
           result = [emote_value] + rest
