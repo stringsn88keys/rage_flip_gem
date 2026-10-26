@@ -145,6 +145,15 @@ frustrated "one more day"
 # Output: ONE. MORE. DAY.
 ```
 
+### confusable
+
+Swaps every letter for a random lookalike glyph: homoglyphs from other scripts (Cyrillic, Greek, Armenian, Cherokee), unaccented letter variants (dotless ı, small capitals), and allographs (fullwidth, bold, script, fraktur, monospace):
+
+```bash
+confusable "hello world"
+# Output (random each time): һ𝐞𝓁ⅼ𝔬 ԝｏг𝚕ԁ
+```
+
 ### strikethrough
 
 Adds strikethrough formatting to text using Unicode combining characters:
@@ -271,6 +280,10 @@ RageFlip::Sarcasm.process("hello world")
 # Frustrated text
 RageFlip::Frustrated.process("one more day")
 # => "ONE. MORE. DAY."
+
+# Confusable (random lookalike glyphs)
+RageFlip::Confusable.process("hello")
+# => "һ𝐞𝓁ⅼ𝔬"
 
 # Strikethrough
 RageFlip::Strikethrough.process("text")
