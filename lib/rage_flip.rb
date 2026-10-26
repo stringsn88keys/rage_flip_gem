@@ -8,6 +8,7 @@ require_relative "rage_flip/clipboard"
 require_relative "rage_flip/emote"
 require_relative "rage_flip/text_substitution"
 require_relative "rage_flip/frustrated"
+require_relative "rage_flip/confusable"
 require "shellwords"
 
 module RageFlip

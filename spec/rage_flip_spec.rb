@@ -64,6 +64,29 @@ RSpec.describe RageFlip do
     end
   end
 
+  describe RageFlip::Confusable do
+    describe ".process" do
+      it "replaces every letter with a different glyph" do
+        input = ("a".."z").to_a.join + ("A".."Z").to_a.join
+        result = RageFlip::Confusable.process(input)
+        expect(result.each_char.count).to eq(input.length)
+        result.each_char.zip(input.each_char).each do |out, orig|
+          expect(out).not_to eq(orig)
+          expect(RageFlip::Confusable::CONFUSABLES[orig]).to include(out)
+        end
+      end
+
+      it "leaves non-letters untouched" do
+        expect(RageFlip::Confusable.process("123 !?")).to eq("123 !?")
+      end
+
+      it "has confusables for every ASCII letter" do
+        letters = ("a".."z").to_a + ("A".."Z").to_a
+        expect(RageFlip::Confusable::CONFUSABLES.keys).to match_array(letters)
+      end
+    end
+  end
+
   describe RageFlip::Strikethrough do
     describe ".process" do
       it "adds strikethrough characters" do
