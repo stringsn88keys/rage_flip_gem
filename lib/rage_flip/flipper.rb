@@ -1,7 +1,7 @@
 module RageFlip
   class Flipper
     FORWARD = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-=!@#$%^&*()_+ "
-    BACKSIDEDOWN = " +‾()*⅋^%$#{@¡}=-068𝘓95ߤ↋↊⇂zʎxʍʌnʇsɹbdouɯʅʞɾᴉɥƃⅎǝpɔqɐZ⅄XϺɅՈꓕSꓤꝹԀONꟽ⅂ꓘᒋIH⅁ᖵƎᗡϽꓭ∀"
+    BACKSIDEDOWN = " +‾()*⅋^%$#{@¡}=-068𝘓95ߤƐᘔ⇂zʎxʍʌnʇsɹbdouɯʅʞɾᴉɥƃⅎǝpɔqɐZ⅄XϺɅՈꓕSꓤÒԀONƜ⅂ꓘᒋIH⅁ᖵƎᗡϽꓭ∀"
 
     def self.flip(word)
       # Create the upside down map by reversing the backsidedown string
