@@ -2,6 +2,8 @@
 
 `rage_flip` is a comprehensive Ruby gem that provides text manipulation utilities with clipboard integration. It flips text upside down with rage table flip emoticons, includes extensive text formatting tools, and features a rich collection of emotes and text substitutions for enhanced communication.
 
+Prefer an app? The same functionality is also available [on the App Store](https://apps.apple.com/app/id6827749145).
+
 ## Installation
 
 Add this line to your application's Gemfile:
