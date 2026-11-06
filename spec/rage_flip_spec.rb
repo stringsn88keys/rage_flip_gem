@@ -112,6 +112,44 @@ RSpec.describe RageFlip do
     end
   end
 
+  describe RageFlip::Italic do
+    describe ".slanted" do
+      it "swaps letters for mathematical italic characters" do
+        expect(RageFlip::Italic.slanted("Az")).to eq("\u{1D434}\u{1D467}")
+      end
+
+      it "uses the Letterlike Symbols character for h" do
+        expect(RageFlip::Italic.slanted("h")).to eq("\u210E")
+      end
+    end
+
+    describe ".script" do
+      it "swaps letters for mathematical script characters" do
+        expect(RageFlip::Italic.script("Az")).to eq("\u{1D49C}\u{1D4CF}")
+      end
+
+      it "uses the Letterlike Symbols characters for letters missing from the script block" do
+        expect(RageFlip::Italic.script("BEFHILMRego")).to eq("\u212C\u2130\u2131\u210B\u2110\u2112\u2133\u211B\u212F\u210A\u2134")
+      end
+    end
+
+    describe ".process" do
+      it "maps every ASCII letter to a distinct, assigned character" do
+        letters = [*"A".."Z", *"a".."z"]
+        [false, true].each do |script|
+          mapped = letters.map { |c| RageFlip::Italic.process(c, script: script) }
+          expect(mapped.uniq.length).to eq(52)
+          expect(mapped).to all(match(/\A\p{Assigned}\z/))
+        end
+      end
+
+      it "leaves digits, punctuation, whitespace and accented letters unchanged" do
+        expect(RageFlip::Italic.process("1 2, é!")).to eq("1 2, é!")
+        expect(RageFlip::Italic.process("1 2, é!", script: true)).to eq("1 2, é!")
+      end
+    end
+  end
+
   describe RageFlip::Chaos do
     let(:chaos_file) { File.expand_path("~/.chaos_level.txt") }
 

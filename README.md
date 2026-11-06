@@ -181,6 +181,18 @@ doubleunderline "double underlined"
 # Output: d̳o̳u̳b̳l̳e̳ ̳u̳n̳d̳e̳r̳l̳i̳n̳e̳d̳
 ```
 
+### italic
+
+Swaps letters for slanted Unicode alternatives, or script ones with `--script`. Digits, punctuation, and accented letters are left unchanged:
+
+```bash
+italic "italic text"
+# Output: 𝑖𝑡𝑎𝑙𝑖𝑐 𝑡𝑒𝑥𝑡
+
+italic --script "script text"
+# Output: 𝓈𝒸𝓇𝒾𝓅𝓉 𝓉ℯ𝓍𝓉
+```
+
 ### chaos
 
 Adds random Unicode combining characters for a chaotic effect:
@@ -295,6 +307,13 @@ RageFlip::Underline.single_underline("text")
 
 RageFlip::Underline.double_underline("text")
 # => "t̳e̳x̳t̳"
+
+# Italic (slanted or script)
+RageFlip::Italic.slanted("text")
+# => "𝑡𝑒𝑥𝑡"
+
+RageFlip::Italic.script("text")
+# => "𝓉ℯ𝓍𝓉"
 
 # Chaos
 RageFlip::Chaos.process("text", 5)
