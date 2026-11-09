@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+
+require_relative "../lib/rage_flip"
+
+script = ARGV.first == "--script"
+text = ARGV.drop(script ? 1 : 0).join(" ")
+
+if text.empty?
+  puts "Usage: italic [--script] <text_to_italicize>"
+  exit 1
+end
+
+result = RageFlip::Italic.process(text, script: script)
+
+if RageFlip::Clipboard.copy(result)
+else
+  puts "Failed to copy to clipboard, but here's your italic text:"
+end
+puts result
