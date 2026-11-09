@@ -233,6 +233,13 @@ RSpec.describe RageFlip do
         expect(result).to eq("🐶💩")
       end
 
+      it "returns temperature unit symbols" do
+        expect(RageFlip::Emote.process("celsius")).to eq("℃")
+        expect(RageFlip::Emote.process("fahrenheit")).to eq("℉")
+        expect(RageFlip::Emote.process("kelvin")).to eq("K")
+        expect(RageFlip::Emote.process("rankine")).to eq("°R")
+      end
+
       it "handles case insensitive input" do
         result = RageFlip::Emote.process("DISAPPROVAL")
         expect(result).to eq("(ಠ_ಠ)")

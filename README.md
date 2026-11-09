@@ -111,6 +111,15 @@ emote shft               # Output: ⇧
 emote shift              # Output: ⇧
 ```
 
+Temperature units:
+
+```bash
+emote celsius            # Output: ℃
+emote fahrenheit         # Output: ℉
+emote kelvin             # Output: K (U+212A KELVIN SIGN)
+emote rankine            # Output: °R
+```
+
 #### Special Emotes
 Multi-line and unique expressions:
 
@@ -254,6 +263,9 @@ The gem includes an extensive collection of emotes organized into categories:
 
 ### Keyboard Symbols
 - `cmd`/`command` (⌘), `optn`/`option` (⌥), `cntl` (⌃), `shft`/`shift` (⇧), `cmd-` (⌘-)
+
+### Temperature Units
+- `celsius` (℃), `fahrenheit` (℉), `kelvin` (K), `rankine` (°R)
 
 ### Special Characters
 - `noevil` (🙈🙉🙊), `omw` ("On my way!"), `heresatable`, `kungfuhamster` (ASCII art), `unsee`

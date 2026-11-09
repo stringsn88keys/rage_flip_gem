@@ -34,6 +34,12 @@ module RageFlip
       "shft" => "⇧",
       "shift" => "⇧",
 
+      # Temperature Units
+      "celsius" => "\u2103",     # ℃ DEGREE CELSIUS
+      "fahrenheit" => "\u2109",  # ℉ DEGREE FAHRENHEIT
+      "kelvin" => "\u212A",      # K KELVIN SIGN
+      "rankine" => "\u00B0R",    # °R (Unicode has no dedicated Rankine sign)
+
       # Smileys & People
       "grin" => "😀",
       "smiley" => "😃",
@@ -1604,6 +1610,10 @@ module RageFlip
       "keyboard" => {
         description: "Keyboard Shortcuts",
         emotes: ["cmd-", "cmd", "command", "cntl", "optn", "option", "shft", "shift"]
+      },
+      "temperature" => {
+        description: "Temperature Units",
+        emotes: ["celsius", "fahrenheit", "kelvin", "rankine"]
       },
       "smileys" => {
         description: "Smileys & People",
