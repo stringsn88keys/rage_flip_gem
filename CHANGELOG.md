@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- `emote celsius`, `fahrenheit`, `kelvin`, and `rankine` temperature unit symbols (℃ ℉ K °R)
 - `italic` command that swaps letters for slanted Unicode alternatives, or script ones with `--script`
 - `flip_text` command for flipping text without any emoticons
 - `emote` command system with disapproval and animal+poop combinations
