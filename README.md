@@ -204,6 +204,27 @@ italic --script "script text"
 # Output: 𝓈𝒸𝓇𝒾𝓅𝓉 𝓉ℯ𝓍𝓉
 ```
 
+### latex
+
+Replaces LaTeX-style markup with Unicode symbols. Use single quotes so the shell keeps the backslashes:
+
+```bash
+latex '\int_0^1 x^2 dx'
+# Output: ∫₀¹ x² dx
+
+latex '\sqrt{x+1} \approx \sqrt[3]{8} \pm \frac{1}{2}'
+# Output: √(x+1) ≈ ∛8 ± ½
+
+latex '\alpha + \beta \to \gamma, \forall x \in \emptyset'
+# Output: α + β → γ, ∀ x ∈ ∅
+```
+
+- `\name` commands cover Greek letters, big operators (`\int`, `\sum`, `\prod`, `\partial`, `\nabla`, `\infty`), operators (`\pm`, `\times`, `\cdot`), relations (`\approx`, `\neq`, `\leq`, `\geq`, `\equiv`), arrows (`\to`, `\Rightarrow`, `\iff`), and sets/logic (`\forall`, `\exists`, `\in`, `\subset`, `\cup`, `\cap`, `\emptyset`). Unknown commands are left as typed.
+- `^2`, `^{n+1}`, `_0` and `_{i=1}` become superscripts and subscripts when every character has a Unicode form; otherwise (e.g. `e^{i\pi}`, since there's no superscript π) they're left as typed.
+- `\sqrt{x}` → `√x`, `\sqrt{x+1}` → `√(x+1)`, `\sqrt[3]{x}` → `∛x`, `\sqrt[5]{x}` → `⁵√x`.
+- `\frac{1}{2}` → `½` when a vulgar fraction exists, otherwise `\frac{a+b}{c}` → `(a+b)/c`.
+- Spaces are kept as typed, `$` delimiters pass through, `\left`/`\right` are dropped, and `\{ \} \_ \^ \$ \% \& \# \\` output the escaped character.
+
 ### chaos
 
 Adds random Unicode combining characters for a chaotic effect:
@@ -328,6 +349,10 @@ RageFlip::Italic.slanted("text")
 
 RageFlip::Italic.script("text")
 # => "𝓉ℯ𝓍𝓉"
+
+# LaTeX-style markup to Unicode
+RageFlip::Latex.process("\\int_0^1 x^2 dx")
+# => "∫₀¹ x² dx"
 
 # Chaos
 RageFlip::Chaos.process("text", 5)

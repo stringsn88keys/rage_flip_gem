@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+
+require_relative "../lib/rage_flip"
+
+text = ARGV.join(" ")
+
+if text.empty?
+  puts "Usage: latex <latex_text>"
+  puts "Quote the text so the shell keeps the backslashes: latex '\\int_0^1 x^2 dx'"
+  exit 1
+end
+
+result = RageFlip::Latex.process(text)
+
+if RageFlip::Clipboard.copy(result)
+else
+  puts "Failed to copy to clipboard, but here's your text:"
+end
+puts result
