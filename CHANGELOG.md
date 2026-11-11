@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- `emote` math symbols in a new `math` category: roots (`sqrt`/`radical` √, `cbrt` ∛, `fourthroot` ∜), integrals (`integral` ∫ and friends), `summation` ∑, `squared` ², `cubed` ³, `sup0`–`sup9`, `sub0`–`sub9`, and common relations like `plusminus` ±
 - `emote celsius`, `fahrenheit`, `kelvin`, and `rankine` temperature unit symbols (℃ ℉ K °R)
 - `italic` command that swaps letters for slanted Unicode alternatives, or script ones with `--script`
 - `flip_text` command for flipping text without any emoticons
@@ -16,6 +17,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `emote bullshit`, `catshit`, `dogshit`, `pandashit`, `horseshit`, `batshit` commands
 - `emote list` to display all available emotes
 - `table_flip` command with classic `(╯°□°)╯︵` and `┻━┻` emoticons
+
+### Changed
+- `emote plusminus` and `emote minusplus` now return ± and ∓ instead of the compound ➕➖ / ➖➕ (`emote plus-minus` still gives ➕➖)
 
 ### Fixed
 - **Windows Unicode Support**: Fixed clipboard handling of Unicode characters on Windows by implementing proper UTF-16LE encoding with BOM. This resolves issues where Unicode characters (rage flip emoticons, flipped text characters, emoji, accented characters, etc.) would not copy correctly to the Windows clipboard.

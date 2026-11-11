@@ -120,6 +120,19 @@ emote kelvin             # Output: K (U+212A KELVIN SIGN)
 emote rankine            # Output: °R
 ```
 
+Math symbols:
+
+```bash
+emote sqrt               # Output: √ (also: radical)
+emote cbrt               # Output: ∛ (also: cuberoot; fourthroot is ∜)
+emote integral           # Output: ∫ (also: doubleintegral ∬, tripleintegral ∭, contourintegral ∮)
+emote summation          # Output: ∑
+emote squared            # Output: ²
+emote cubed              # Output: ³
+emote sup2 sub1          # Output: ²₁ (sup0–sup9, supplus, supminus, supn, sub0–sub9)
+emote plusminus          # Output: ± (also: minusplus ∓, approx ≈, notequal ≠, lessequal ≤, greaterequal ≥)
+```
+
 #### Special Emotes
 Multi-line and unique expressions:
 
@@ -266,6 +279,13 @@ The gem includes an extensive collection of emotes organized into categories:
 
 ### Temperature Units
 - `celsius` (℃), `fahrenheit` (℉), `kelvin` (K), `rankine` (°R)
+
+### Math Symbols
+- Roots: `sqrt`/`radical` (√), `cbrt`/`cuberoot` (∛), `fourthroot` (∜)
+- Calculus: `integral` (∫), `doubleintegral` (∬), `tripleintegral` (∭), `contourintegral` (∮), `summation` (∑), `prod` (∏), `partialdiff` (∂), `nabla` (∇), `infty` (∞)
+- Relations: `plusminus` (±), `minusplus` (∓), `approx` (≈), `notequal` (≠), `lessequal` (≤), `greaterequal` (≥), `equiv` (≡), `propto` (∝)
+- Superscripts: `squared` (²), `cubed` (³), `sup0`–`sup9` (⁰–⁹), `supplus` (⁺), `supminus` (⁻), `supn` (ⁿ)
+- Subscripts: `sub0`–`sub9` (₀–₉)
 
 ### Special Characters
 - `noevil` (🙈🙉🙊), `omw` ("On my way!"), `heresatable`, `kungfuhamster` (ASCII art), `unsee`

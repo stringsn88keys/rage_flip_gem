@@ -40,6 +40,55 @@ module RageFlip
       "kelvin" => "\u212A",      # K KELVIN SIGN
       "rankine" => "\u00B0R",    # °R (Unicode has no dedicated Rankine sign)
 
+      # Math Symbols
+      "sqrt" => "\u221A",         # √ SQUARE ROOT
+      "radical" => "\u221A",      # √ SQUARE ROOT
+      "cbrt" => "\u221B",         # ∛ CUBE ROOT
+      "cuberoot" => "\u221B",     # ∛ CUBE ROOT
+      "fourthroot" => "\u221C",   # ∜ FOURTH ROOT
+      "integral" => "\u222B",     # ∫ INTEGRAL
+      "doubleintegral" => "\u222C", # ∬ DOUBLE INTEGRAL
+      "tripleintegral" => "\u222D", # ∭ TRIPLE INTEGRAL
+      "contourintegral" => "\u222E", # ∮ CONTOUR INTEGRAL
+      "summation" => "\u2211",    # ∑ N-ARY SUMMATION
+      "prod" => "\u220F",         # ∏ N-ARY PRODUCT
+      "partialdiff" => "\u2202",  # ∂ PARTIAL DIFFERENTIAL
+      "nabla" => "\u2207",        # ∇ NABLA
+      "infty" => "\u221E",        # ∞ INFINITY (text, unlike the ♾️ "infinity" emoji)
+      "plusminus" => "\u00B1",    # ± PLUS-MINUS SIGN
+      "minusplus" => "\u2213",    # ∓ MINUS-OR-PLUS SIGN
+      "approx" => "\u2248",       # ≈ ALMOST EQUAL TO
+      "notequal" => "\u2260",     # ≠ NOT EQUAL TO
+      "lessequal" => "\u2264",    # ≤ LESS-THAN OR EQUAL TO
+      "greaterequal" => "\u2265", # ≥ GREATER-THAN OR EQUAL TO
+      "equiv" => "\u2261",        # ≡ IDENTICAL TO
+      "propto" => "\u221D",       # ∝ PROPORTIONAL TO
+      "squared" => "\u00B2",      # ² SUPERSCRIPT TWO
+      "cubed" => "\u00B3",        # ³ SUPERSCRIPT THREE
+      "sup0" => "\u2070",         # ⁰
+      "sup1" => "\u00B9",         # ¹
+      "sup2" => "\u00B2",         # ²
+      "sup3" => "\u00B3",         # ³
+      "sup4" => "\u2074",         # ⁴
+      "sup5" => "\u2075",         # ⁵
+      "sup6" => "\u2076",         # ⁶
+      "sup7" => "\u2077",         # ⁷
+      "sup8" => "\u2078",         # ⁸
+      "sup9" => "\u2079",         # ⁹
+      "supplus" => "\u207A",      # ⁺
+      "supminus" => "\u207B",     # ⁻
+      "supn" => "\u207F",         # ⁿ
+      "sub0" => "\u2080",         # ₀
+      "sub1" => "\u2081",         # ₁
+      "sub2" => "\u2082",         # ₂
+      "sub3" => "\u2083",         # ₃
+      "sub4" => "\u2084",         # ₄
+      "sub5" => "\u2085",         # ₅
+      "sub6" => "\u2086",         # ₆
+      "sub7" => "\u2087",         # ₇
+      "sub8" => "\u2088",         # ₈
+      "sub9" => "\u2089",         # ₉
+
       # Smileys & People
       "grin" => "😀",
       "smiley" => "😃",
@@ -1615,6 +1664,15 @@ module RageFlip
         description: "Temperature Units",
         emotes: ["celsius", "fahrenheit", "kelvin", "rankine"]
       },
+      "math" => {
+        description: "Math Symbols",
+        emotes: ["sqrt", "radical", "cbrt", "cuberoot", "fourthroot", "integral", "doubleintegral",
+                 "tripleintegral", "contourintegral", "summation", "prod", "partialdiff", "nabla",
+                 "infty", "plusminus", "minusplus", "approx", "notequal", "lessequal", "greaterequal",
+                 "equiv", "propto", "squared", "cubed", "sup0", "sup1", "sup2", "sup3", "sup4", "sup5",
+                 "sup6", "sup7", "sup8", "sup9", "supplus", "supminus", "supn", "sub0", "sub1", "sub2",
+                 "sub3", "sub4", "sub5", "sub6", "sub7", "sub8", "sub9"]
+      },
       "smileys" => {
         description: "Smileys & People",
         emotes: EMOTES.keys.select { |k|
@@ -2158,7 +2216,7 @@ module RageFlip
           emote category food      - Show all food emotes
 
         Categories:
-          custom, keyboard, smileys, animals, combined, food,
+          custom, keyboard, temperature, math, smileys, animals, combined, food,
           activity, travel, objects, symbols, flags
 
         Compound Emotes:
