@@ -288,6 +288,32 @@ RSpec.describe RageFlip do
         expect(RageFlip::Emote.process("rankine")).to eq("°R")
       end
 
+      it "returns math symbols" do
+        expect(RageFlip::Emote.process("sqrt")).to eq("√")
+        expect(RageFlip::Emote.process("radical")).to eq("√")
+        expect(RageFlip::Emote.process("cbrt")).to eq("∛")
+        expect(RageFlip::Emote.process("integral")).to eq("∫")
+        expect(RageFlip::Emote.process("doubleintegral")).to eq("∬")
+        expect(RageFlip::Emote.process("summation")).to eq("∑")
+        expect(RageFlip::Emote.process("squared")).to eq("²")
+        expect(RageFlip::Emote.process("cubed")).to eq("³")
+        expect(RageFlip::Emote.process("plusminus")).to eq("±")
+        expect(RageFlip::Emote.process("infty")).to eq("∞")
+      end
+
+      it "returns superscript and subscript digits" do
+        superscripts = (0..9).map { |d| RageFlip::Emote.process("sup#{d}") }.join
+        subscripts = (0..9).map { |d| RageFlip::Emote.process("sub#{d}") }.join
+        expect(superscripts).to eq("⁰¹²³⁴⁵⁶⁷⁸⁹")
+        expect(subscripts).to eq("₀₁₂₃₄₅₆₇₈₉")
+      end
+
+      it "lists math symbols in their own category" do
+        math = RageFlip::Emote.get_category_emotes("math")
+        expect(math).to include("sqrt", "integral", "squared", "sup2", "sub2")
+        expect(math).to all(satisfy { |name| !RageFlip::Emote.emoji_only?(RageFlip::Emote::EMOTES[name]) })
+      end
+
       it "handles case insensitive input" do
         result = RageFlip::Emote.process("DISAPPROVAL")
         expect(result).to eq("(ಠ_ಠ)")
