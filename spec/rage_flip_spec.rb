@@ -150,6 +150,54 @@ RSpec.describe RageFlip do
     end
   end
 
+  describe RageFlip::Latex do
+    describe ".process" do
+      def latex(text) = RageFlip::Latex.process(text)
+
+      it "replaces symbol commands and keeps spacing as typed" do
+        expect(latex("\\alpha + \\beta \\to \\Omega")).to eq("α + β → Ω")
+        expect(latex("\\forall x \\in \\emptyset, x \\neq \\infty")).to eq("∀ x ∈ ∅, x ≠ ∞")
+      end
+
+      it "converts superscripts and subscripts" do
+        expect(latex("\\int_0^1 x^2 dx")).to eq("∫₀¹ x² dx")
+        expect(latex("x_{n+1} = x_n^2")).to eq("xₙ₊₁ = xₙ²")
+        expect(latex("\\sum_{i=1}^{n} i^{-1}")).to eq("∑ᵢ₌₁ⁿ i⁻¹")
+        expect(latex("H_2O and E = mc^2")).to eq("H₂O and E = mc²")
+      end
+
+      it "leaves scripts as typed when a character has no Unicode script form" do
+        expect(latex("e^{i\\pi}")).to eq("e^{iπ}")
+        expect(latex("x^{q}")).to eq("x^{q}")
+        expect(latex("a^ b_")).to eq("a^ b_")
+      end
+
+      it "converts square and nth roots" do
+        expect(latex("\\sqrt{x+1}")).to eq("√(x+1)")
+        expect(latex("\\sqrt2 \\sqrt{x} \\sqrt\\pi")).to eq("√2 √x √π")
+        expect(latex("\\sqrt[3]{8} \\sqrt[4]{x} \\sqrt[5]{y}")).to eq("∛8 ∜x ⁵√y")
+        expect(latex("\\sqrt")).to eq("√")
+      end
+
+      it "converts fractions" do
+        expect(latex("\\frac{1}{2} \\frac34")).to eq("½ ¾")
+        expect(latex("\\frac{a+b}{c}")).to eq("(a+b)/c")
+        expect(latex("\\frac{1}")).to eq("\\frac{1}")
+      end
+
+      it "handles escapes, unknown commands and unbalanced braces" do
+        expect(latex("\\{x\\} 100\\% \\$5")).to eq("{x} 100% $5")
+        expect(latex("\\unknown \\alphax")).to eq("\\unknown \\alphax")
+        expect(latex("x^{2")).to eq("x^{2")
+        expect(latex("\\left( x \\right)^2")).to eq("( x )²")
+      end
+
+      it "leaves plain text unchanged" do
+        expect(latex("Hello World 123 é 👍🏽")).to eq("Hello World 123 é 👍🏽")
+      end
+    end
+  end
+
   describe RageFlip::Chaos do
     let(:chaos_file) { File.expand_path("~/.chaos_level.txt") }
 

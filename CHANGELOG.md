@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- `latex` command that replaces LaTeX-style markup (`\int`, `\sqrt{x}`, `x^2`, `a_{n+1}`, `\frac{1}{2}`, Greek letters, relations, arrows) with Unicode symbols
 - `emote` math symbols in a new `math` category: roots (`sqrt`/`radical` √, `cbrt` ∛, `fourthroot` ∜), integrals (`integral` ∫ and friends), `summation` ∑, `squared` ², `cubed` ³, `sup0`–`sup9`, `sub0`–`sub9`, and common relations like `plusminus` ±
 - `emote celsius`, `fahrenheit`, `kelvin`, and `rankine` temperature unit symbols (℃ ℉ K °R)
 - `italic` command that swaps letters for slanted Unicode alternatives, or script ones with `--script`
