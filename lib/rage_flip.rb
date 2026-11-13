@@ -1,4 +1,5 @@
 require_relative "rage_flip/version"
+require_relative "rage_flip/interrobang"
 require_relative "rage_flip/flipper"
 require_relative "rage_flip/sarcasm"
 require_relative "rage_flip/strikethrough"

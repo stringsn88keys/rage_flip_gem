@@ -58,7 +58,7 @@ module RageFlip
     }.freeze
 
     def self.process(text)
-      text.each_char.map { |c| CONFUSABLES[c]&.sample || c }.join
+      Interrobang.process(text).each_char.map { |c| CONFUSABLES[c]&.sample || c }.join
     end
   end
 end

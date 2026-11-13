@@ -238,6 +238,20 @@ latex '\alpha + \beta \to \gamma, \forall x \in \emptyset'
 - `\frac{1}{2}` → `½` when a vulgar fraction exists, otherwise `\frac{a+b}{c}` → `(a+b)/c`.
 - Spaces are kept as typed, `$` delimiters pass through, `\left`/`\right` are dropped, and `\{ \} \_ \^ \$ \% \& \# \\` output the escaped character.
 
+### Interrobang substitution
+
+Every text transform (`rage_flip`, `table_flip`, `flip_text`, `sarcasm`, `frustrated`, `confusable`, `strikethrough`, `underline`, `doubleunderline`, `italic`, `latex`, `chaos`) first turns each `?!` or `!?` pair into the interrobang ‽. Pairs are matched left to right, so `?!?!` → `‽‽`, `?!?` → `‽?` and `!!?` → `!‽`; `??` and `!!` are left alone. Flips also turn `?` into `¿` and ‽ into the inverted interrobang ⸘:
+
+```bash
+sarcasm "you did what?!"
+# Output: YoU DiD WhAt‽
+
+flip_text "really?!"
+# Output: ⸘ʎʅʅɐǝɹ
+```
+
+For a lone ‽, use `emote interrobangtext` or `latex '\interrobang'` (`emote interrobang` gives the ⁉️ emoji).
+
 ### chaos
 
 Adds random Unicode combining characters for a chaotic effect:
@@ -310,6 +324,7 @@ The gem includes an extensive collection of emotes organized into categories:
 
 ### Special Characters
 - `noevil` (🙈🙉🙊), `omw` ("On my way!"), `heresatable`, `kungfuhamster` (ASCII art), `unsee`
+- `interrobangtext` (‽), next to the `interrobang` (⁉️) and `bangbang` (‼️) emoji
 
 Use `emote list` to see all available emotes with their outputs.
 
@@ -373,6 +388,10 @@ RageFlip::Italic.script("text")
 # LaTeX-style markup to Unicode
 RageFlip::Latex.process("\\int_0^1 x^2 dx")
 # => "∫₀¹ x² dx"
+
+# Interrobang (applied by every transform above)
+RageFlip::Interrobang.process("what?! no!?")
+# => "what‽ no‽"
 
 # Chaos
 RageFlip::Chaos.process("text", 5)

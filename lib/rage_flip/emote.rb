@@ -1273,6 +1273,7 @@ module RageFlip
       "infinity" => "♾️",
       "bangbang" => "‼️",
       "interrobang" => "⁉️",
+      "interrobangtext" => "‽", # ‽ INTERROBANG (text, unlike the ⁉️ "interrobang" emoji)
       "question" => "❓",
       "greyquestion" => "❔",
       "exclamation" => "❗",
@@ -1881,7 +1882,7 @@ module RageFlip
                  "recordbutton", "ejectbutton", "cinema", "lowbrightness", "highbrightness",
                  "signalstrength", "wireless", "vibration", "phoneoff", "female", "male", "transgender",
                  "multiply", "plus", "minus", "divide", "heavyequals", "infinity", "bangbang",
-                 "interrobang", "question", "greyquestion", "exclamation", "greyexclamation", "wavy",
+                 "interrobang", "interrobangtext", "question", "greyquestion", "exclamation", "greyexclamation", "wavy",
                  "currencyexchange", "heavydollar", "medicalymbol", "recycle", "fleurdelis", "trident",
                  "namebadge", "beginner", "hollowredcircle", "checkmark", "checkmarkbox", "checkmarkbtn",
                  "crossmark", "crossbtn", "curlloop", "doublecurl", "partalt", "eightspoke",

@@ -6,7 +6,7 @@ module RageFlip
     def self.process(text, chaos_level = nil)
       chaos_level ||= read_chaos_level
 
-      text.each_char.map do |c|
+      Interrobang.process(text).each_char.map do |c|
         combining_chars = rand(1..chaos_level).times.map do
           "%c" % rand(0x300..0x36f)
         end

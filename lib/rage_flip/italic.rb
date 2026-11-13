@@ -35,7 +35,7 @@ module RageFlip
     # Characters without an alternative (digits, punctuation, accented
     # letters) pass through unchanged.
     def self.process(text, script: false)
-      text.gsub(/[A-Za-z]/, script ? SCRIPT_MAP : SLANTED_MAP)
+      Interrobang.process(text).gsub(/[A-Za-z]/, script ? SCRIPT_MAP : SLANTED_MAP)
     end
 
     def self.slanted(text)

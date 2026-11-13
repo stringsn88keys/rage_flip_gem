@@ -3,7 +3,15 @@ module RageFlip
     FORWARD = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-=!@#$%^&*()_+ "
     BACKSIDEDOWN = " +‾()*⅋^%$#{@¡}=-068𝘓95ߤƐᘔ⇂zʎxʍʌnʇsɹbdouɯʅʞɾᴉɥƃⅎǝpɔqɐZ⅄XϺɅՈꓕSꓤÒԀONƜ⅂ꓘᒋIH⅁ᖵƎᗡϽꓭ∀"
 
+    # Characters outside FORWARD that still have an upside-down form.
+    EXTRA_FLIPS = {
+      "?" => "¿", # ¿
+      "‽" => "⸘" # ‽ → ⸘ (inverted interrobang)
+    }.freeze
+
     def self.flip(word)
+      word = Interrobang.process(word)
+
       # Create the upside down map by reversing the backsidedown string
       upsidedown = BACKSIDEDOWN.reverse
 
@@ -12,6 +20,7 @@ module RageFlip
       FORWARD.each_char.with_index do |char, index|
         upsidedownmap[char] = upsidedown[index] if upsidedown[index]
       end
+      upsidedownmap.merge!(EXTRA_FLIPS)
 
       # Flip the word: reverse the string and map each character
       flipped = ""
