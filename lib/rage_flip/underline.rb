@@ -5,7 +5,7 @@ module RageFlip
 
     def self.process(text, double: false)
       underline_char = double ? DOUBLE_UNDERLINE_CHAR : UNDERLINE_CHAR
-      text.each_char.map { |c| [c, underline_char] }.join
+      Interrobang.process(text).each_char.map { |c| [c, underline_char] }.join
     end
 
     def self.single_underline(text)

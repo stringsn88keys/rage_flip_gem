@@ -47,6 +47,7 @@ module RageFlip
       # Letterlike and miscellaneous
       "hbar" => "ℏ", "ell" => "ℓ", "Re" => "ℜ", "Im" => "ℑ", "aleph" => "ℵ", "wp" => "℘",
       "angle" => "∠", "degree" => "°", "prime" => "′", "cdots" => "⋯", "ldots" => "…",
+      "interrobang" => "‽",
       "dots" => "…", "vdots" => "⋮", "ddots" => "⋱",
       # Sizing commands with no plain-text equivalent
       "left" => "", "right" => ""
@@ -86,7 +87,7 @@ module RageFlip
     WHITESPACE = [" ", "\t", "\n", "\r"].freeze
 
     def self.process(text)
-      convert(text.chars)
+      Interrobang.process(convert(text.chars))
     end
 
     # `chars` is an array of single-codepoint strings.

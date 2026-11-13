@@ -7,6 +7,11 @@ RSpec.describe RageFlip do
         result = RageFlip::Flipper.flip("Hello")
         expect(result).to eq("oʅʅǝH")
       end
+
+      it "turns ? into ¿ and the interrobang into ⸘" do
+        expect(RageFlip::Flipper.flip("why?")).to eq("¿ʎɥʍ")
+        expect(RageFlip::Flipper.flip("‽")).to eq("⸘")
+      end
     end
 
     describe ".rage_flip" do
@@ -33,6 +38,41 @@ RSpec.describe RageFlip do
         expect(result).not_to include("(")
         expect(result).not_to include("┻")
       end
+    end
+  end
+
+  describe RageFlip::Interrobang do
+    describe ".process" do
+      it "replaces ?! and !? with an interrobang" do
+        expect(RageFlip::Interrobang.process("what?! really!?")).to eq("what‽ really‽")
+      end
+
+      it "makes one interrobang per pair, left to right" do
+        expect(RageFlip::Interrobang.process("?!?!")).to eq("‽‽")
+        expect(RageFlip::Interrobang.process("?!?")).to eq("‽?")
+        expect(RageFlip::Interrobang.process("!!?")).to eq("!‽")
+        expect(RageFlip::Interrobang.process("!!??")).to eq("!‽?")
+      end
+
+      it "leaves repeated ? or ! alone" do
+        expect(RageFlip::Interrobang.process("?? !!")).to eq("?? !!")
+      end
+    end
+
+    it "is applied by every text transform" do
+      expect(RageFlip::Flipper.flip_text("a?!")).to eq("⸘ɐ")
+      expect(RageFlip::Flipper.rage_flip("?!")).to eq("(ノಠ益ಠ)ノ彡┻⸘┻")
+      expect(RageFlip::Flipper.table_flip("!?")).to eq("(╯°□°)╯︵┻⸘ ┻")
+      expect(RageFlip::Sarcasm.process("no?!")).to eq("No‽")
+      expect(RageFlip::Frustrated.process("why?! no")).to eq("WHY‽. NO.")
+      expect(RageFlip::Strikethrough.process("?!")).to eq("‽̶")
+      expect(RageFlip::Underline.single_underline("?!")).to eq("‽̲")
+      expect(RageFlip::Underline.double_underline("?!")).to eq("‽̳")
+      expect(RageFlip::Italic.slanted("a?!")).to eq("𝑎‽")
+      expect(RageFlip::Italic.script("a?!")).to eq("𝒶‽")
+      expect(RageFlip::Confusable.process("?!")).to eq("‽")
+      expect(RageFlip::Latex.process("x^2?!")).to eq("x²‽")
+      expect(RageFlip::Chaos.process("?!", 1)).to start_with("‽")
     end
   end
 
@@ -77,7 +117,7 @@ RSpec.describe RageFlip do
       end
 
       it "leaves non-letters untouched" do
-        expect(RageFlip::Confusable.process("123 !?")).to eq("123 !?")
+        expect(RageFlip::Confusable.process("123 !!?")).to eq("123 !‽")
       end
 
       it "has confusables for every ASCII letter" do
@@ -157,6 +197,10 @@ RSpec.describe RageFlip do
       it "replaces symbol commands and keeps spacing as typed" do
         expect(latex("\\alpha + \\beta \\to \\Omega")).to eq("α + β → Ω")
         expect(latex("\\forall x \\in \\emptyset, x \\neq \\infty")).to eq("∀ x ∈ ∅, x ≠ ∞")
+      end
+
+      it "supports \\interrobang" do
+        expect(latex("what\\interrobang")).to eq("what‽")
       end
 
       it "converts superscripts and subscripts" do
@@ -269,6 +313,11 @@ RSpec.describe RageFlip do
       it "returns correct emote for disapproval" do
         result = RageFlip::Emote.process("disapproval")
         expect(result).to eq("(ಠ_ಠ)")
+      end
+
+      it "returns the text interrobang for interrobangtext and keeps the emoji for interrobang" do
+        expect(RageFlip::Emote.process("interrobangtext")).to eq("‽")
+        expect(RageFlip::Emote.process("interrobang")).to eq("⁉️")
       end
 
       it "returns correct emote for bullshit" do

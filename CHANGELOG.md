@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Interrobang substitution in every text transform (`flip`/`flip_text`, `rage_flip`, `table_flip`, `sarcasm`, `frustrated`, `confusable`, `strikethrough`, `underline`, `doubleunderline`, `italic`, `latex`, `chaos`): each `?!` or `!?` pair becomes ‽ (`?!?!` → `‽‽`, `!!?` → `!‽`). Available as `RageFlip::Interrobang.process`
+- Flips turn `?` into `¿` and ‽ into the inverted interrobang ⸘
+- `emote interrobangtext` (‽) and `latex '\interrobang'` (‽); `emote interrobang` still gives the ⁉️ emoji
 - `latex` command that replaces LaTeX-style markup (`\int`, `\sqrt{x}`, `x^2`, `a_{n+1}`, `\frac{1}{2}`, Greek letters, relations, arrows) with Unicode symbols
 - `emote` math symbols in a new `math` category: roots (`sqrt`/`radical` √, `cbrt` ∛, `fourthroot` ∜), integrals (`integral` ∫ and friends), `summation` ∑, `squared` ², `cubed` ³, `sup0`–`sup9`, `sub0`–`sub9`, and common relations like `plusminus` ±
 - `emote celsius`, `fahrenheit`, `kelvin`, and `rankine` temperature unit symbols (℃ ℉ K °R)
@@ -20,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `table_flip` command with classic `(╯°□°)╯︵` and `┻━┻` emoticons
 
 ### Changed
+- Text transforms now output ‽ where the input has `?!` or `!?`, and flips output `¿` for `?` (both used to pass through unchanged)
 - `emote plusminus` and `emote minusplus` now return ± and ∓ instead of the compound ➕➖ / ➖➕ (`emote plus-minus` still gives ➕➖)
 
 ### Fixed
